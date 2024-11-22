@@ -1,0 +1,83 @@
+create database mecanica;
+
+use mecanica;
+
+create table veiculo (
+id int auto_increment primary key,
+placa varchar(255), 
+modelo varchar(255),
+ano varchar(255),
+cor varchar(255)
+);
+
+create table cliente (
+id int auto_increment primary key,
+nome varchar(255),
+telefone varchar(255),
+email varchar(255)
+);
+
+create table mecanico (
+id int auto_increment primary key,
+nome varchar(255),
+especialidade varchar(255)
+);
+
+create table servico (
+id int auto_increment primary key,
+descricao varchar(255),
+preco decimal(10,2)
+);
+
+drop table ordem_servico;
+create table ordem_servico (
+id int not null primary key auto_increment,
+veiculo_id int not null,
+			foreign key(veiculo_id) references veiculo(id),
+cliente_id int not null,
+           foreign key(cliente_id) references cliente(id),
+data_abertura date,
+estado varchar(255)
+);
+
+select * from ordem_servico;
+select * from cliente;
+
+insert into veiculo( placa, modelo, ano, cor)
+			values ("ABC-1234", 'fiesta', "2018", "prata");
+            
+insert into cliente( nome, telefone)
+			values ("carlos", '123456789');
+
+insert into mecanico( nome, especialidade)
+			values ("joao", 'motor');
+            
+insert into servico( descricao, preco)
+			values ("troca_de_oleo", 150.00);
+            
+insert into ordem_servico ( veiculo_id, cliente_id, data_abertura, estado)
+				   values           (  1, 1, "2024-11-22", "aberta");
+            
+select * from veiculo;
+
+select * from cliente;
+
+select * from servico;
+
+select * from ordem_servico;
+
+update ordem_servico set estado = "Fechada" where id = 1;
+
+delete from cliente
+where nome="carlos";
+
+alter table ordem_servico
+add column data_fechamento date;
+
+select * from mecanino;
+
+insert into servico( descricao, preco)
+			values ("alinhamento", 80.00);
+
+select * from veiculo;
+
